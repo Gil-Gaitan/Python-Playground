@@ -65,3 +65,7 @@ plt.figure(figsize=(8, 6))
 sns.heatmap(numeric_df.corr(), annot=True, cmap="coolwarm", fmt=".2f", linewidths=0.5)
 plt.title("Feature Correlation Heatmap")
 plt.show()
+
+sns.pairplot(df, hue="Species", diag_kind="hist", markers=["o", "s", "D"])
+plt.suptitle("Pairwise Relationships of Iris Dataset", size=16)
+plt.show()
