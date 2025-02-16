@@ -68,12 +68,14 @@ numeric_df = df.select_dtypes(include=["float64", "int64"])  # Exclude non-numer
 print(numeric_df.corr())
 
 # Plot the correlation heatmap
+# Correlation map is a matrix comparing variables
 plt.figure(figsize=(8, 6))
 sns.heatmap(numeric_df.corr(), annot=True, cmap="coolwarm", fmt=".2f", linewidths=0.5)
 plt.title("Feature Correlation Heatmap")
 plt.show()
 
 # Pairwise
+# Compares every variable to every other variable
 sns.pairplot(df, hue="Species", diag_kind="hist", markers=["o", "s", "D"])
 plt.suptitle("Pairwise Relationships of Iris Dataset", size=16)
 plt.show()
