@@ -42,8 +42,6 @@ def temperature_conversion_table_zero_through(num):
     print("Celsius\tFahrenheit")
     for i in range(num + 1):
         temperature_conversion(i)
-        
-def split_and_cascade_column_into()
 
 
 # Program 4: Palindrome
