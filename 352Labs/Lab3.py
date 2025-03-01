@@ -1,13 +1,8 @@
-# Author: Gil Gaitan
-# Course: ICS 352-50 Machine Learning
-#         Spring 2024 - Bradford Armitage
-#
-# Lab 3: Numpy Arrays
-# This is a collection of methods that work with numpy to manipulate data.
-# Program 1 is an exercise in creating an array with slicing, then
-# selecting specific parts of the data.
-# Program 2 is an exercise in stacking arrays horizontally and vertically.
-# Program 3 uses the tile function to extend a pattern into a checkerboard.
+# Arrays
+# Methods that work with numpy to manipulate data.
+# 1. Array with slicing, selecting parts.
+# 2. stacking arrays horizontally and vertically.
+# 3. Tile function to extend a pattern into a checkerboard.
 
 import numpy as np
 

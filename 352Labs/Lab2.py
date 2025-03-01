@@ -1,19 +1,14 @@
-import random
-
-# Name:     Gil Gaitan
-# Course:   ICS 352-50 Machine Learning - Brad Armitage - Spring 2025
-# Lab  2 - Python Exercises
-
-# Lab 2
-# Overview of List, Tuple, Dictionary, and Set
-# Assignment Programs:
+# List, Tuple, Dictionary, Set
+# Programs:
 #   1. Summarizing Letters in a String
 #   2. Counting Duplicate words
 #   3. Numbers Frequency
 #   4. Is a Sentence Sorted
 
+import random
 
-# Program 1: Summarizing Letters in a String
+
+# Summarizing Letters in a String
 def summarize_letters(string):
     letter_frequency_dictionary = {}
     for letter in string:
@@ -43,7 +38,7 @@ print("\nSummarizing Letters in a String:")
 summarize_letters_test()
 
 
-# Program 2: Counting Duplicate words
+# Counting Duplicate words
 
 
 def count_duplicate_words(sentence):
@@ -70,10 +65,11 @@ def count_duplicate_words_test():
 print("\nCounting Duplicate Words:")
 count_duplicate_words_test()
 
-# Program 3: Numbers Frequency
+# Numbers Frequency
 
 
 def generate_random_numbers():
+
     random_numbers = [random.randint(1, 10) for _ in range(100)]
     return random_numbers
 
@@ -99,7 +95,7 @@ def numbers_frequency_test():
 print("\nNumbers Frequency:")
 numbers_frequency_test()
 
-# Program 4: Is a Sentence Sorted
+# Is a Sentence Sorted
 # 1.	Search for the meaning of sequences in Python, and explain what is a sequence in python?
 # 2.	Create a function is_ordered that receives a sequence and returns true if the elements are in sorted order. Test your function with sorted and unsorted lists, tuples and strings.
 

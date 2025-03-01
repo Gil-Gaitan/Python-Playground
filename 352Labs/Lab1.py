@@ -1,8 +1,3 @@
-# Name:     Gil Gaitan
-# Course:   ICS 352-50 Machine Learning - Brad Armitage - Spring 2025
-# Lab  1 - Python Basic Exercises
-
-# Lab 1
 # Overview of Python’s decision structure, iterative structure, functions, and reading/writing from files
 # The following programs are implemented:
 #   1. Table of Squares and Cubes
