@@ -1,10 +1,10 @@
-import threading
-import json
-import os
-import sys
-import time
-from socket import *
-import hashlib
+import threading  # Threading for multiple clients
+import json  # JSON for user database
+import os  # OS for file operations
+import sys  # System for command line arguments
+from socket import *  # Socket for networking
+import hashlib  # Hash passwords for good practice
+import time  # Time for sleep, timestamps
 
 USER_DB_FILE = "users.json"
 connected_users = {}  # Tracks active users {username: client_socket}
@@ -33,7 +33,7 @@ def hash_password(password):
 # Send active users list every 5 seconds
 def broadcast_user_list():
     while True:
-        time.sleep(5)
+        time.sleep(60)
         with lock:
             if connected_users:
                 user_list = (
