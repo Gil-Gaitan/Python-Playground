@@ -5,24 +5,25 @@ from sklearn.metrics import accuracy_score, classification_report, confusion_mat
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
+import pandas as pd
 
-# Load the breast cancer dataset
+# Load the breast cancer dataset into a pandas
 data = load_breast_cancer()
-print("Dataset loaded successfully.\n")
 
 X = data.data  # Features
 y = data.target  # Labels
 
-# Display dataset information
-print("Dataset Information:")
-print(f"Number of Samples: {X.shape[0]}")
-print(f"Number of Features: {X.shape[1]}")
-print(f"Classes: {data.target_names.tolist()}\n")
+print(
+    "\n\nSection 1 - Part A: Load the breast cancer dataset into a pandas DataFrame\n"
+)
+
+# Convert the dataset into a pandas DataFrame
+df = pd.DataFrame(data.data, columns=data.feature_names)
+df["target"] = data.target
 
 # Display the first 5 samples
 print("First 5 Samples:")
-print(X[:5])
-print(y[:5])
+print(df.head())
 print("\n")
 
 # Split the dataset into 70% training and 30% testing
@@ -113,5 +114,6 @@ plt.xlabel("Predicted")
 plt.ylabel("Actual")
 plt.title("Confusion Matrix - Second Split")
 plt.show()
+
 
 #
