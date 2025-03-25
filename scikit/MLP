@@ -1,0 +1,39 @@
+import numpy as np
+from sklearn.datasets import load_digits
+from sklearn.model_selection import train_test_split
+from sklearn.neural_network import MLPClassifier
+from sklearn.metrics import accuracy_score
+import matplotlib.pyplot as plt
+
+# Load the dataset
+digits = load_digits()
+X = digits.data  # Features (pixel values)
+y = digits.target  # Labels (digit categories 0-9)
+
+# Split the data into training and testing sets
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.3, random_state=42
+)
+
+# Train the MLP classifier
+clf = MLPClassifier(hidden_layer_sizes=(64,), max_iter=1000, random_state=42)
+clf.fit(X_train, y_train)
+
+# Make predictions on the test set
+y_pred = clf.predict(X_test)
+
+# Print number of epochs
+print(f"Number of epochs: {clf.n_iter_}")
+
+# Calculate accuracy
+accuracy = accuracy_score(y_test, y_pred)
+print(f"Accuracy: {accuracy * 100:.2f}%")
+
+# Visualize some results
+plt.figure(figsize=(6, 6))
+for i in range(9):  # Show 9 images
+    plt.subplot(3, 3, i + 1)
+    plt.imshow(X_test[i].reshape(8, 8), cmap=plt.cm.gray)
+    plt.title(f"Pred: {y_pred[i]}")
+    plt.axis("off")
+plt.show()
