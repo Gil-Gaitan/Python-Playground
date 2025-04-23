@@ -1,10 +1,11 @@
 import numpy as np
 from sklearn.datasets import load_digits
 from time import time
-
 from sklearn import metrics
 from sklearn.pipeline import make_pipeline
 from sklearn.preprocessing import StandardScaler
+from sklearn.cluster import KMeans
+from sklearn.decomposition import PCA
 
 data, labels = load_digits(return_X_y=True)
 (n_samples, n_features), n_digits = data.shape, np.unique(labels).size
@@ -61,9 +62,6 @@ def bench_k_means(kmeans, name, data, labels):
     )
     print(formatter_result.format(*results))
 
-
-from sklearn.cluster import KMeans
-from sklearn.decomposition import PCA
 
 print(82 * "_")
 print("init\t\ttime\tinertia\thomo\tcompl\tv-meas\tARI\tAMI\tsilhouette")
