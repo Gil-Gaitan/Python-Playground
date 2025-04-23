@@ -1,7 +1,6 @@
 # Stephen Marsland, 2008, 2014
 
 import numpy as np
-from pcn import pcn
 
 
 class pcn:
