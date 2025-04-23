@@ -16,7 +16,7 @@ X, y = make_classification(
     n_classes=2,  # Number of classes, or labels
     n_clusters_per_class=1,  # Number of clusters per class
     class_sep=2.0,  # Class separation, factor by which classes are separated
-    random_state=1984,  # Seed for reproducibility
+    random_state=84,  # Seed for reproducibility
 )
 
 # y was type float64, convert to int - this helps processing
@@ -72,18 +72,18 @@ class Perceptron:
         self.bias = 0
 
         for epoch in range(self.n_epochs):
-            for idx, x_i in enumerate(X):
+            for index, x in enumerate(X):
                 # Compute linear output, dot product of input features and weights - add bias
-                linear_output = np.dot(x_i, self.weights) + self.bias
+                linear_output = np.dot(x, self.weights) + self.bias
 
-                # _activation step function with linear output
+                # _activation step with linear output
                 y_pred = self._activation(linear_output)
 
                 # Update weights and bias using learning rate and error
-                update = self.lr * (y[idx] - y_pred)
+                update = self.lr * (y[index] - y_pred)
 
                 # Update weights with scaled update and input features
-                self.weights += update * x_i
+                self.weights += update * x
 
                 # Update bias by adding scaled update value
                 self.bias += update
