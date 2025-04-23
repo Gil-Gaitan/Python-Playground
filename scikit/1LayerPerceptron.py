@@ -24,42 +24,6 @@ y = y.astype(int)
 
 
 class Perceptron:
-    """
-    How to use this Perceptron class
-
-    Attributes:
-        lr: Learning rate for weight updates. Default is 0.01.
-        n_epochs (int): Number of epochs for training. Default is 100.
-        weights (numpy.ndarray): Weights of perceptron, initialized during training.
-        bias: Bias term of perceptron, initialized during training.
-
-    Methods to set up:
-        fit(X, y):
-            Train perceptron on given dataset.
-
-            Parameters:
-                X (numpy.ndarray): Feature matrix of shape (n_samples, n_features).
-                y (numpy.ndarray): Target vector of shape (n_samples,).
-
-        predict(X):
-            Predicts class labels for given input data.
-
-            Parameters:
-                X (numpy.ndarray): Feature matrix of shape (n_samples, n_features).
-
-            Returns:
-                numpy.ndarray: Predicted class labels of shape (n_samples,).
-
-        _activation(x):
-            Applies step activation function.
-
-            Parameters:
-                x (numpy.ndarray or float): Input value(s).
-
-            Returns:
-                numpy.ndarray or int: Output after applying activation function.
-    """
-
     def __init__(self, lr=0.01, n_epochs=150):
         self.lr = lr
         self.n_epochs = n_epochs
