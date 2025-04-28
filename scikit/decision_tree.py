@@ -6,7 +6,7 @@ from sklearn.model_selection import train_test_split, GridSearchCV
 from sklearn.tree import DecisionTreeClassifier, plot_tree, export_text
 from sklearn.metrics import accuracy_score
 
-# Create Dataset
+# Create manually
 print("\nCreating dataset.")
 data = {
     "Referrer": [
@@ -80,6 +80,7 @@ data = {
     ],
 }
 
+# Create DataFrame
 df = pd.DataFrame(data)
 print(df)
 
@@ -195,11 +196,13 @@ y_pred_decoded = label_encoders["Service Chosen"].inverse_transform(y_pred)
 
 X_test_reset = X_test.reset_index(drop=True)
 
+# Create a DataFrame to store test results for visualization
+results = []
 for i in range(len(X_test)):
     input_features = X_test_reset.iloc[i]
     predicted = y_pred_decoded[i]
     actual = y_test_decoded[i]
-    correct = "✓" if predicted == actual else "✗"
+    correct = predicted == actual
 
     referrer = label_encoders["Referrer"].inverse_transform(
         [input_features["Referrer"]]
@@ -212,6 +215,40 @@ for i in range(len(X_test)):
     )[0]
     pages = input_features["Pages viewed"]
 
-    print(
-        f"Test case {i+1}: Referrer={referrer}, Location={location}, FAQ={read_faq}, Pages={pages} => Predicted: {predicted}, Actual: {actual} [{correct}]"
+    results.append(
+        {
+            "Referrer": referrer,
+            "Location": location,
+            "Read FAQ": read_faq,
+            "Pages viewed": pages,
+            "Predicted": predicted,
+            "Actual": actual,
+            "Correct": correct,
+        }
     )
+
+# Convert results to a DataFrame
+results_df = pd.DataFrame(results)
+
+# Print results in tabular format
+print("\nTest Results:")
+print(results_df)
+
+# Visualize results with a bar plot
+plt.figure(figsize=(12, 6))
+sns.barplot(
+    x=results_df.index + 1,
+    y=results_df["Pages viewed"],
+    hue=results_df["Correct"],
+    dodge=False,
+    palette={True: "green", False: "red"},
+)
+plt.axhline(y=0, color="black", linewidth=0.8, linestyle="--")
+plt.title("Test Case Predictions: Correct vs Incorrect")
+plt.xlabel("Test Case")
+plt.ylabel("Pages Viewed")
+plt.legend(title="Prediction Correct?", loc="upper right")
+plt.show()
+
+# Add a note
+print("Green bars Correct // Red bars = Incorrect")
