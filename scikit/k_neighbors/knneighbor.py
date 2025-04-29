@@ -62,34 +62,36 @@ def euclidean_distance(point1, point2):
 # Added print statements to show process
 # Predict function accepts a point, training data, and selected k)
 def knn_predict(test_point, training_data, k):
-    distances = []
+    distances = []  # List to store distances
     for train_point in training_data:
         # Only use x and y for distance calculation
         distance = euclidean_distance(test_point[:2], train_point[:2])
-        distances.append((distance, train_point[2]))  # Save (distance, label value)
+        distances.append(
+            (distance, train_point[2])
+        )  # Append to list (distance, label value)
 
     # Sort by distance and get k nearest neighbors
     distances.sort(key=lambda x: x[0])
     neighbors = distances[:k]
 
-    # Print neighbors for this test point
+    # Print statements to see the process
     print(f"\nTest point: {test_point[:2]}")
     print(f"Neighbors (distance, label):")
     for dist, label in neighbors:
         print(f"  Distance: {dist:.2f}, Label: {int(label)}")
 
     # Voting
-    class_votes = {}
-    for _, label in neighbors:
+    class_votes = {}  # Dictionary to count votes
+    for _, label in neighbors:  # Iterate through neighbors
         class_votes[label] = class_votes.get(label, 0) + 1
 
-    # Print results
+    # Show Process
     print("Vote counts:")
     for label, count in class_votes.items():
         print(f"  Label {int(label)}: {count} votes")
 
     # Decide based on classification
-    predicted_class = max(class_votes, key=class_votes.get)
+    predicted_class = max(class_votes, key=class_votes.get)  # Get class with max votes
     print(f"Predicted class: {int(predicted_class)}")
 
     return predicted_class
@@ -98,7 +100,7 @@ def knn_predict(test_point, training_data, k):
 # CHOOSE K VALUE HERE
 #
 #
-k = 2
+k = 6
 #
 #
 
@@ -122,7 +124,7 @@ for class_value, style in class_styles.items():
         marker=style["marker"],
         color=style["color"],
         edgecolors="k",
-        s=100,
+        s=50,
     )
 
 # Define lighter colors for test points
@@ -214,3 +216,82 @@ plt.ylabel("Accuracy (%)")
 plt.title("Accuracy vs. k (Number of Neighbors) for KNN")
 plt.grid(True)
 plt.show()
+
+# Lastl step, Add 10 more points. File created manually.
+test_data_new10 = np.loadtxt("points_test_new10.txt")
+print("New test points loaded from points_test_new10.txt")
+print("Adding 10 more points to test. Printing the first 5 rows:")
+print(test_data_new10[:5])
+
+# Predict classes for new test points
+predictions_new10 = []
+k = 7  # Change as needed <----------------------------
+for test_point in test_data_new10:
+    predicted_class = knn_predict(test_point, training_data, k)
+    predictions_new10.append(predicted_class)
+
+print("\nStep 6: Visualizing new test points (only incorrect ones marked)")
+
+plt.figure(figsize=(8, 6))
+
+# Plot training points first
+for class_value, style in class_styles.items():
+    idx = labels == class_value
+    plt.scatter(
+        X[idx],
+        Y[idx],
+        marker=style["marker"],
+        color=style["color"],
+        edgecolors="k",
+        s=50,
+    )
+
+# Plot new test points
+for i, test_point in enumerate(test_data_new10):
+    predicted_label = predictions_new10[i]
+    true_label = test_point[2]
+
+    plt.scatter(
+        test_point[0],
+        test_point[1],
+        marker=class_styles[predicted_label]["marker"],
+        color=lighter_colors[predicted_label],
+        edgecolors="black",
+        linewidths=2,
+        s=200,
+    )
+
+    if int(predicted_label) != int(true_label):
+        plt.scatter(
+            test_point[0],
+            test_point[1],
+            marker="x",
+            color="red",
+            s=150,
+            linewidths=3,
+        )
+
+plt.xlabel("X coordinate")
+plt.ylabel("Y coordinate")
+plt.title("New Test Points (Red X = Incorrect Prediction)")
+plt.grid(True)
+plt.show()
+
+# Accuracy for new test points
+correct_predictions_new10 = 0
+total_predictions_new10 = len(test_data_new10)
+
+for i, test_point in enumerate(test_data_new10):
+    predicted_label = predictions_new10[i]
+    true_label = test_point[2]  # True label from new test data
+
+    if int(predicted_label) == int(true_label):
+        correct_predictions_new10 += 1
+
+# Calculate accuracy
+accuracy_new10 = (correct_predictions_new10 / total_predictions_new10) * 100
+
+print(
+    f"New Data Bottom Line: With a k of {k}, Accuracy is {accuracy_new10:.2f}%. "
+    f"{correct_predictions_new10} correct out of {total_predictions_new10} new test points."
+)
